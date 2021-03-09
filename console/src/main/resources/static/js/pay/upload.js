@@ -1,6 +1,6 @@
 var editFlag;
 var removeFlag;
-var prefix = ctx + "system/user/";
+var prefix = ctx + "retirement/type";
 $(function () {
 
     queryList();
@@ -10,14 +10,14 @@ function queryList() {
     var options = {
         url: prefix + "/queryAll",
         createUrl: prefix + "/index/add",
-        updateUrl: prefix + "/index/edit/?id={id}",
-        removeUrl: prefix + "/deleteById",
-        exportUrl: prefix + "/export",
-        importUrl: prefix + "/importData",
-        importTemplateUrl: prefix + "/importTemplate",
-        sortName: "createTime",
-        sortOrder: "desc",
-        modalName: "用户",
+        // updateUrl: prefix + "/updateById",
+        // removeUrl: prefix + "/deleteById",
+        // exportUrl: prefix + "/export",
+        // importUrl: prefix + "/importData",
+        // importTemplateUrl: prefix + "/importTemplate",
+        // sortName: "createTime",
+        // sortOrder: "desc",
+        // modalName: "用户",
         columns: [
             {
                 width:"5%",
@@ -25,24 +25,24 @@ function queryList() {
             },
             {
                 width:"20%",
-                field: 'userName',
-                title: '登录账号',
+                field: 'retirementName',
+                title: '离退休名称',
                 sortable: false
             },
             {
                 width:"20%",
-                field: 'realName',
-                title: '账号名称'
+                field: 'defaultFlag',
+                title: '当前默认'
             },
-            {
-                width:"20%",
-                visible: true,
-                title: '用户状态',
-                align: 'center',
-                formatter: function (value, row, index) {
-                    return statusTools(row);
-                }
-            },
+            // {
+            //     width:"20%",
+            //     visible: true,
+            //     title: '用户状态',
+            //     align: 'center',
+            //     formatter: function (value, row, index) {
+            //         return statusTools(row);
+            //     }
+            // },
             {
                 width:"20%",
                 field: 'createDate',
