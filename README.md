@@ -1,7 +1,7 @@
 管理系统
 ##### 访问地址: http://localhost:8080
-###### 登录账号：mars 
-###### 密码:mars
+###### 登录账号：admin 
+###### 密码:admin123
 
 后端框架  
 springboot 2.1.1.RELEASE
