@@ -55,56 +55,47 @@ public class RetirementTypeController {
     }
 
 
-    @ApiOperation("数据列表")
-    @GetMapping("/queryList")
-    @ResponseBody
-    public Collection<RetirementTypeEntity> queryList(@RequestParam Map<String, Object> params) {
-        return retirementTypeService.queryList(params);
-    }
-
-
-    @ApiOperation("根据id查询")
-    @PostMapping("/selectById")
-    @ResponseBody
-    public RespVo selectById(Long id) {
-        RetirementTypeEntity data = retirementTypeService.selectById(id);
-        return RespVo.success(data);
-    }
-
-
     @ApiOperation("新增")
-    @PostMapping("/insert")
+    @PostMapping("/add")
     @ResponseBody
-    public RespVo add(@RequestBody RetirementTypeEntity entity) {
-        retirementTypeService.insert(entity);
+    public RespVo add(@RequestParam("retirementName") String retirementName) {
+        retirementTypeService.insert(retirementName);
+        return RespVo.success();
+    }
+
+    @ApiOperation("修改默认")
+    @PostMapping("/updateDefaultFlag")
+    @ResponseBody
+    public RespVo updateDefaultFlag(@RequestParam("id") Long id) {
+        retirementTypeService.updateDefaultFlag(id);
         return RespVo.success();
     }
 
 
-    @ApiOperation("修改")
-    @PostMapping("/updateById")
-    @ResponseBody
-    public RespVo updateById(@RequestBody RetirementTypeEntity entity) {
-        retirementTypeService.updateById(entity);
-        return RespVo.success();
-    }
-
-    @ApiOperation("根据id删除")
-    @PostMapping("/deleteById")
-    @ResponseBody
-    public RespVo deleteById(Long id) {
-        retirementTypeService.deleteById(id);
-        return RespVo.success();
-    }
-
-
-    @ApiOperation("批量删除")
-    @PostMapping("/deleteByIds")
-    @ResponseBody
-    public RespVo delete(@RequestBody Long[] ids) {
-        retirementTypeService.deleteBatchIds(Arrays.asList(ids));
-        return RespVo.success();
-    }
+//    @ApiOperation("修改")
+//    @PostMapping("/updateById")
+//    @ResponseBody
+//    public RespVo updateById(@RequestBody RetirementTypeEntity entity) {
+//        retirementTypeService.updateById(entity);
+//        return RespVo.success();
+//    }
+//
+//    @ApiOperation("根据id删除")
+//    @PostMapping("/deleteById")
+//    @ResponseBody
+//    public RespVo deleteById(Long id) {
+//        retirementTypeService.deleteById(id);
+//        return RespVo.success();
+//    }
+//
+//
+//    @ApiOperation("批量删除")
+//    @PostMapping("/deleteByIds")
+//    @ResponseBody
+//    public RespVo delete(@RequestBody Long[] ids) {
+//        retirementTypeService.deleteBatchIds(Arrays.asList(ids));
+//        return RespVo.success();
+//    }
 
 
 }

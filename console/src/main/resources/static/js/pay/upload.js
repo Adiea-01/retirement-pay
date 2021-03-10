@@ -10,14 +10,14 @@ function queryList() {
     var options = {
         url: prefix + "/queryAll",
         createUrl: prefix + "/index/add",
-        // updateUrl: prefix + "/updateById",
-        // removeUrl: prefix + "/deleteById",
+        updateUrl: prefix + "/updateById",
+        removeUrl: prefix + "/deleteById",
         // exportUrl: prefix + "/export",
         // importUrl: prefix + "/importData",
         // importTemplateUrl: prefix + "/importTemplate",
-        // sortName: "createTime",
-        // sortOrder: "desc",
-        // modalName: "用户",
+        sortName: "createTime",
+        sortOrder: "desc",
+        modalName: "离退休",
         columns: [
             {
                 width:"5%",
@@ -32,17 +32,17 @@ function queryList() {
             {
                 width:"20%",
                 field: 'defaultFlag',
-                title: '当前默认'
+                title: '当前默认',
+                formatter: function (value, row, index) {
+                    var actions = [];
+                    if(row.defaultFlag==0){
+                        actions.push('<a class="btn btn-success btn-xs" onclick="setDefaultFlag(\'' + row.id + '\')"><i class="fa fa-check-square-o"></i> 设为默认</a> ');
+                    }else {
+                        actions.push('<a class="btn btn-default btn-xs" disabled="disabled"> 默认</a>');
+                    }
+                    return actions.join('');
+                }
             },
-            // {
-            //     width:"20%",
-            //     visible: true,
-            //     title: '用户状态',
-            //     align: 'center',
-            //     formatter: function (value, row, index) {
-            //         return statusTools(row);
-            //     }
-            // },
             {
                 width:"20%",
                 field: 'createDate',
@@ -55,8 +55,8 @@ function queryList() {
                 align: 'center',
                 formatter: function (value, row, index) {
                     var actions = [];
-                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\',800,400)"><i class="fa fa-edit"></i>编辑</a> ');
-                    actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ');
+                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\',800,400)"><i class="fa fa-edit"></i> 编辑</a> ');
+                    actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i> 删除</a> ');
                     return actions.join('');
                 }
             }]
@@ -65,11 +65,24 @@ function queryList() {
 }
 
 
-/* 用户状态显示 */
-function statusTools(row) {
-    if (row.status == 1) {
-        return '开启';
-    } else {
-        return '关闭';
-    }
+/* 修改当前默认 */
+function setDefaultFlag(id) {
+    $.ajax({
+        url: "./updateDefaultFlag",
+        type: "post",
+        data: {"id": id},
+        dataType: "json",
+        async: false,
+        beforeSend: function () {
+            $.modal.loading("正在处理中，请稍后...");
+        },
+        success: function(result) {
+            console.log(result);
+            if(result.code==0){
+                $.modal.reload();
+            }
+        },error:function () {
+            $.modal.closeLoading();
+        }
+    });
 }

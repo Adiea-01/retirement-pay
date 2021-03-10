@@ -1,19 +1,15 @@
 package com.github.fashionbrot.core.dao;
 
-
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.fashionbrot.core.entity.RetirementPayrollEntity;
-
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 /**
- * 离退休工资单管理表
- *
- * @author panzhenghui
- * @email
- * @date 2021-03-09
+ * @Description:
+ * @Author: pan zhenghui
+ * @Date: 2021/3/10 15:21
  */
-
-public interface RetirementPayrollDao extends IService<RetirementPayrollEntity> {
-
+@Slf4j
+@Service
+public class RetirementPayrollDao {
 
 }

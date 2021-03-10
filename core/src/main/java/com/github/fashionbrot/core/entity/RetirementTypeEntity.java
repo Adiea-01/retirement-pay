@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * 离退休分类表
@@ -18,6 +17,9 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("retirement_type")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RetirementTypeEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +28,8 @@ public class RetirementTypeEntity extends BaseEntity {
     @TableField("retirement_name")
     private String retirementName;
 
-    @ApiModelProperty(value = "当前默认 0为默认")
+    @ApiModelProperty(value = "当前默认 1:当前默认")
     @TableField("default_flag")
     private Integer defaultFlag;
+
 }
