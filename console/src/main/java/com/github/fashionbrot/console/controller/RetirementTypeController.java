@@ -3,7 +3,6 @@ package com.github.fashionbrot.console.controller;
 
 import com.github.fashionbrot.common.annotation.MarsPermission;
 import com.github.fashionbrot.common.vo.RespVo;
-import com.github.fashionbrot.core.entity.RetirementTypeEntity;
 import com.github.fashionbrot.core.service.RetirementTypeService;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.Api;
@@ -11,10 +10,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
 
 
 /**
@@ -38,12 +33,17 @@ public class RetirementTypeController {
     @GetMapping("/index")
     @MarsPermission("retirement:type:index")
     public String index() {
-        return "system/pay/upload";
+        return "system/pay/retirementTypeList";
     }
 
     @GetMapping("/index/add")
     public String indexAdd() {
         return "system/pay/add";
+    }
+
+    @GetMapping("/upload")
+    public String upload() {
+        return "system/pay/upload";
     }
 
     @ApiOperation("数据列表—分页")
