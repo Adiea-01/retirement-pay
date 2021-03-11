@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -50,12 +51,12 @@ public class RetirementTypeController {
     @PostMapping("/queryAll")
     @ResponseBody
     public RespVo queryAll(@RequestParam(defaultValue = "1") Integer pageNum,
-                       @RequestParam(defaultValue = "20") Integer pageSize){
+                       @RequestParam(defaultValue = "10") Integer pageSize){
         return  RespVo.success(retirementTypeService.queryAll(pageNum,pageSize));
     }
 
 
-    @ApiOperation("新增")
+    @ApiOperation("新增离退休名称")
     @PostMapping("/add")
     @ResponseBody
     public RespVo add(@RequestParam("retirementName") String retirementName) {
@@ -63,7 +64,7 @@ public class RetirementTypeController {
         return RespVo.success();
     }
 
-    @ApiOperation("修改默认")
+    @ApiOperation("修改当前默认")
     @PostMapping("/updateDefaultFlag")
     @ResponseBody
     public RespVo updateDefaultFlag(@RequestParam("id") Long id) {
@@ -72,13 +73,14 @@ public class RetirementTypeController {
     }
 
 
-//    @ApiOperation("修改")
-//    @PostMapping("/updateById")
-//    @ResponseBody
-//    public RespVo updateById(@RequestBody RetirementTypeEntity entity) {
-//        retirementTypeService.updateById(entity);
-//        return RespVo.success();
-//    }
+    @ApiOperation("修改")
+    @GetMapping("/index/edit")
+    public String edit(Long id, ModelMap modelMap) {
+        modelMap.put("info", retirementTypeService.queryById(id));
+        return "system/pay/edit";
+    }
+
+
 //
 //    @ApiOperation("根据id删除")
 //    @PostMapping("/deleteById")

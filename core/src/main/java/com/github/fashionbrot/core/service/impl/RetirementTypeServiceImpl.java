@@ -26,20 +26,6 @@ public class RetirementTypeServiceImpl implements RetirementTypeService {
     @Autowired
     private RetirementTypeDao retirementTypeDao;
 
-//    @Override
-//    public Collection<RetirementTypeEntity> queryList(Map<String, Object> params) {
-//        return retirementTypeDao.listByMap(params);
-//    }
-
-//    /**
-//     * 查询数据列表
-//     *
-//     * @param params 查询条件
-//     * @return List<RetirementTypeEntity>
-//     */
-//    public Collection<RetirementTypeEntity> retirementTypeByMap(Map<String, Object> params) {
-//        return retirementTypeDao.listByMap(params);
-//    }
 
     /**
      * 分页查询
@@ -78,83 +64,12 @@ public class RetirementTypeServiceImpl implements RetirementTypeService {
         }
     }
 
-    //    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public boolean insertBatch(Collection<RetirementTypeEntity> entityList) {
-//        return retirementTypeDao.saveBatch(entityList, 30);
-//    }
+    @Override
+    public RetirementTypeEntity queryById(Long id) {
+        return retirementTypeDao.queryById(id);
+    }
 
-//    /**
-//     * 批量插入
-//     *
-//     * @param entityList
-//     * @param batchSize
-//     * @return
-//     */
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public boolean insertBatch(Collection<RetirementTypeEntity> entityList, int batchSize) {
-//        return retirementTypeDao.saveBatch(entityList, batchSize);
-//    }
-//
-//    @Override
-//    public void updateById(RetirementTypeEntity entity) {
-//        if (!retirementTypeDao.updateById(entity)) {
-//            throw new CurdException(RespCode.UPDATE_ERROR);
-//        }
-//    }
-//
-//    @Override
-//    public void update(RetirementTypeEntity entity, Wrapper<RetirementTypeEntity> updateWrapper) {
-//        if (!retirementTypeDao.update(entity, updateWrapper)) {
-//            throw new CurdException(RespCode.UPDATE_ERROR);
-//        }
-//    }
-//
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public boolean updateBatchById(Collection<RetirementTypeEntity> entityList) {
-//        return retirementTypeDao.updateBatchById(entityList, 30);
-//    }
-//
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public boolean updateBatchById(Collection<RetirementTypeEntity> entityList, int batchSize) {
-//        return retirementTypeDao.updateBatchById(entityList, batchSize);
-//    }
-//
-//    @Override
-//    public RetirementTypeEntity selectById(Serializable id) {
-//        return retirementTypeDao.getById(id);
-//    }
-//
-//    @Override
-//    public void deleteById(Serializable id) {
-//        if (!retirementTypeDao.removeById(id)) {
-//            throw new CurdException(RespCode.DELETE_ERROR);
-//        }
-//    }
-//
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public void deleteBatchIds(Collection<? extends Serializable> idList) {
-//        if (CollectionUtils.isNotEmpty(idList)) {
-//            boolean result = retirementTypeDao.removeByIds(idList);
-//            if (!result) {
-//                throw new CurdException(RespCode.DELETE_ERROR);
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public boolean deleteByMap(Map<String, Object> columnMap) {
-//        return retirementTypeDao.removeByMap(columnMap);
-//    }
-//
-//    @Override
-//    public boolean delete(Wrapper<RetirementTypeEntity> queryWrapper) {
-//        return retirementTypeDao.remove(queryWrapper);
-//    }
+
 
 
 }

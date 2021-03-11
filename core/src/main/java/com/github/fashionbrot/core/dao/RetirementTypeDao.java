@@ -2,7 +2,6 @@ package com.github.fashionbrot.core.dao;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.fashionbrot.core.entity.RetirementTypeEntity;
-import com.github.fashionbrot.core.entity.RoleInfo;
 import com.github.fashionbrot.core.mapper.RetirementTypeMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +40,12 @@ public class RetirementTypeDao {
         retirementTypeMapper.updateAllByDefaultFlag(0);
         return retirementTypeMapper.updateDefaultFlagById(1, id);
     }
+
+
+    public RetirementTypeEntity queryById(Long id) {
+        RetirementTypeEntity retirementTypeEntity = retirementTypeMapper.selectById(id);
+        return retirementTypeEntity;
+    }
+
 
 }
