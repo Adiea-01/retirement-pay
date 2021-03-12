@@ -9,12 +9,12 @@
 
 	<form class="form-horizontal m" id="editRetirementTypeForm" th:object="${info}" style="border: 0px solid red;">
 
-		<input name="id"  type="hidden"  th:field="*{id}" />
+		<input name="id" type="hidden" th:field="*{id}"/>
 
 		<div class="form-group">
 			<label class="col-sm-3 control-label ">离退休名称：</label>
 			<div class="col-sm-8">
-				<input class="form-control" type="text"  th:field="*{retirementName}"/>
+				<input class="form-control" type="text" th:field="*{retirementName}"/>
 			</div>
 		</div>
 
@@ -29,34 +29,21 @@
 <th:block th:include="include :: footer" />
 <th:block th:include="include :: select2-js" />
 <script type="text/javascript">
-	var prefix = ctx + "system/user";
-	var roleId = [[${info.roleId}]];
-	loadRole("roleId",roleId);
-
-	$("#editForm").validate({
+	var prefix = ctx + "retirement/type";
+	$("#editRetirementTypeForm").validate({
 		onkeyup: false,
 		rules: {
-			userName: {
+			retirementName: {
 				required: true,
 				minlength: 2,
-				maxlength:20
-			},
-			password: {
-				required: true,
-				minlength: 5,
 				maxlength:20
 			}
 		},
 		messages: {
-			userName: {
+			retirementName: {
 				required: "请输入您的用户名",
 				minlength: "登录名必须两个字符以上",
 				maxlength: "登录名必须20字符以下"
-			},
-			password: {
-				required:  "请输入您的密码",
-				minlength: "密码必须5个字符以上",
-				maxlength: "密码必须20字符以下"
 			}
 		},
 		focusCleanup: true
@@ -64,10 +51,8 @@
 
 	function submitHandler() {
 		if ($.validate.form()) {
-			var data = $("#editForm").serializeJson();
+			var data = $("#editRetirementTypeForm").serializeJson();
 			console.log(JSON.stringify(data));
-			var status = $("input[id='status']").is(':checked') == false ? 0 : 1;
-			data.status = status;
 			$.operate.save(prefix + "/update", data,null,true);
 		}
 	}

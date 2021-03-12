@@ -40,4 +40,19 @@ public interface RetirementTypeService {
      */
     RetirementTypeEntity queryById(Long id);
 
+    /**
+     * 修改离退休名称
+     * @param retirementTypeEntity
+     */
+    void update(RetirementTypeEntity retirementTypeEntity);
+
+    /**
+     * 通过id删除该条信息
+     * @param id
+     */
+    void deleteById(Long id);
+
+
+
+
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('工资列表')"/>
+    <th:block th:include="include :: layout-latest-css"/>
+    <th:block th:include="include :: ztree-css"/>
+</head>
+<body class="gray-bg">
+
+<div class="container-div">
+    <div class="row">
+
+        <div class="col-sm-12 select-table table-striped " style="height:98%;">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+
+
+<th:block th:include="include :: footer"/>
+<script th:src="@{/js/pay/payList.js}"></script>
+</body>
+</html>

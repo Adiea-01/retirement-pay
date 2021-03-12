@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.util.Date;
 
@@ -20,6 +19,9 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @TableName("retirement_payroll")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RetirementPayrollEntity extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 

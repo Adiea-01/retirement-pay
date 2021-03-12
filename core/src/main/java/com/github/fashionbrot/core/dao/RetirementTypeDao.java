@@ -48,4 +48,14 @@ public class RetirementTypeDao {
     }
 
 
+    public int update(RetirementTypeEntity retirementTypeEntity) {
+        return retirementTypeMapper.updateById(retirementTypeEntity);
+    }
+
+    public int deleteById(Long id) {
+        return retirementTypeMapper.deleteById(id);
+    }
+
+
+
 }
