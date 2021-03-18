@@ -1,13 +1,12 @@
 package com.github.fashionbrot.core.dao;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.fashionbrot.core.entity.RetirementTypeEntity;
 import com.github.fashionbrot.core.mapper.RetirementPayrollMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -21,8 +20,17 @@ public class RetirementPayrollDao {
     @Autowired
     private RetirementPayrollMapper retirementPayrollMapper;
 
-    public List<RetirementTypeEntity> queryAll(QueryWrapper queryWrapper) {
-        return retirementPayrollMapper.selectList(queryWrapper);
+    public List<Map<String, Object>> selectAll() {
+        return retirementPayrollMapper.selectAll();
     }
+
+    public List<Map<String, Object>> selectAllByIdentityCard(String identityCard) {
+        return retirementPayrollMapper.selectAllByIdentityCard(identityCard);
+    }
+
+    public Map<String, Object> selectAllById(Long id) {
+        return retirementPayrollMapper.selectAllById(id);
+    }
+
 
 }

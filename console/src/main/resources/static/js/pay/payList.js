@@ -1,23 +1,16 @@
-var editFlag;
-var removeFlag;
+var detailFlag;
 var prefix = ctx + "retirement/payroll";
 $(function () {
-
     queryList();
 });
 
 function queryList() {
     var options = {
-        // url: prefix + "/queryAll",
-        // createUrl: prefix + "/index/add",
-        // updateUrl: prefix + "/index/edit/?id={id}",
-        // removeUrl: prefix + "/deleteById",
-        // exportUrl: prefix + "/upload",
-        // importUrl: prefix + "/upload",
-        // importTemplateUrl: prefix + "/upload",
+        url: prefix + "/queryAll",
+        detailUrl: prefix + "/index/payDetail?id={id}",
         sortName: "createTime",
         sortOrder: "desc",
-        modalName: "工资",
+        modalName: "工资列表",
         columns: [
             {
                 width:"5%",
@@ -37,7 +30,7 @@ function queryList() {
             },
             {
                 width:"20%",
-                field: 'roleName',
+                field: 'realName',
                 title: '姓名',
                 sortable: false
             },
@@ -55,7 +48,7 @@ function queryList() {
                 formatter: function (value, row, index) {
                     var actions = [];
                     if(row.view==1){
-                        actions.push('<a class="btn btn-success btn-xs"><i class="fa fa-check-square-o"></i> 已查看</a> ');
+                        actions.push('<a class="btn btn-success btn-xs" disabled="disabled"> 已查看</a> ');
                     }else {
                         actions.push('<a class="btn btn-default btn-xs" disabled="disabled"> 未查看</a>');
                     }
@@ -70,9 +63,26 @@ function queryList() {
             },
             {
                 width:"20%",
+                field: 'retirementName',
+                title: '离退休工资类型',
+                sortable: false
+            },
+            {
+                width:"20%",
                 field: 'createDate',
                 title: '创建时间',
                 sortable: false
+            },
+            {
+                width:"20%",
+                field: 'detailFlag',
+                title: '操作',
+                sortable: false,
+                formatter: function (value, row, index) {
+                    var actions = [];
+                    actions.push('<a class="btn btn-warning btn-xs ' + detailFlag + '" href="javascript:void(0)" onclick="$.operate.detail(\'' + row.id + '\')"><i class="fa fa-search"></i> 查看详细</a>');
+                    return actions.join('');
+                }
             }]
     };
     $.table.init(options);

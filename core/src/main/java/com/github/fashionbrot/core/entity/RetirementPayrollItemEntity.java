@@ -1,6 +1,8 @@
 package com.github.fashionbrot.core.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,9 +22,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RetirementPayrollItemEntity extends BaseEntity {
+public class RetirementPayrollItemEntity{
     private static final long serialVersionUID = 1L;
 
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     @ApiModelProperty(value = "离退休工资单id")
     @TableField("retirement_payroll_id")
