@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 18/03/2021 17:08:37
+ Date: 19/03/2021 17:05:16
 */
 
 SET NAMES utf8mb4;
@@ -51,17 +51,16 @@ DROP TABLE IF EXISTS `retirement_payroll_item`;
 CREATE TABLE `retirement_payroll_item`  (
   `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `retirement_payroll_id` bigint(11) NOT NULL COMMENT '离退休工资单id',
-  `pay_item` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '工资项目',
-  `pay_result` varchar(3000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '工资数据',
-  `unit` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '单位',
+  `pay_item` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付名称',
+  `pay_result` varchar(3000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付金额',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7319221 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '离退休工资数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of retirement_payroll_item
 -- ----------------------------
-INSERT INTO `retirement_payroll_item` VALUES (1, 28618, '公积金', '2000', '元');
-INSERT INTO `retirement_payroll_item` VALUES (2, 28618, '退休工资', '50900', '元');
+INSERT INTO `retirement_payroll_item` VALUES (1, 28618, '公积金', '2000');
+INSERT INTO `retirement_payroll_item` VALUES (2, 28618, '退休工资', '50900');
 
 -- ----------------------------
 -- Table structure for retirement_type
@@ -82,9 +81,9 @@ CREATE TABLE `retirement_type`  (
 -- ----------------------------
 -- Records of retirement_type
 -- ----------------------------
-INSERT INTO `retirement_type` VALUES (7319221, '离休', 0, 1, '2021-03-10 15:16:01', 0, 1, '2021-03-12 14:44:23');
+INSERT INTO `retirement_type` VALUES (7319221, '离休', 1, 1, '2021-03-10 15:16:01', 0, 1, '2021-03-12 14:44:23');
 INSERT INTO `retirement_type` VALUES (7319222, '企业退休', 0, 1, '2021-03-10 16:09:47', 0, NULL, NULL);
-INSERT INTO `retirement_type` VALUES (7319223, '事业退休', 1, 1, '2021-03-10 16:10:06', 0, NULL, NULL);
+INSERT INTO `retirement_type` VALUES (7319223, '事业退休', 0, 1, '2021-03-10 16:10:06', 0, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -108,7 +107,7 @@ CREATE TABLE `sys_log`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_del_flagAndinterface_type`(`del_flag`, `interface_type`) USING BTREE,
   INDEX `index_create_id`(`create_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 84 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 95 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
@@ -163,6 +162,17 @@ INSERT INTO `sys_log` VALUES (80, '', '/retirement/payroll/index/payDetail', 'GE
 INSERT INTO `sys_log` VALUES (81, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 15:41:28', NULL, 0);
 INSERT INTO `sys_log` VALUES (82, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 16:11:53', NULL, 0);
 INSERT INTO `sys_log` VALUES (83, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 16:42:01', NULL, 0);
+INSERT INTO `sys_log` VALUES (84, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 17:18:15', NULL, 0);
+INSERT INTO `sys_log` VALUES (85, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 09:03:10', NULL, 0);
+INSERT INTO `sys_log` VALUES (86, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 09:38:59', NULL, 0);
+INSERT INTO `sys_log` VALUES (87, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, 1, NULL, '2021-03-19 09:50:03', NULL, 0);
+INSERT INTO `sys_log` VALUES (88, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 10:27:53', NULL, 0);
+INSERT INTO `sys_log` VALUES (89, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 10:59:48', NULL, 0);
+INSERT INTO `sys_log` VALUES (90, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 14:09:44', NULL, 0);
+INSERT INTO `sys_log` VALUES (91, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 15:20:16', NULL, 0);
+INSERT INTO `sys_log` VALUES (92, '离退休分类表-修改当前默认', '/retirement/type/updateDefaultFlag', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319221\"]}', 'updateDefaultFlag', 1, 1, 1, NULL, '2021-03-19 15:20:41', NULL, 0);
+INSERT INTO `sys_log` VALUES (93, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 15:54:14', NULL, 0);
+INSERT INTO `sys_log` VALUES (94, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 16:29:47', NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -324,7 +334,7 @@ CREATE TABLE `sys_user_info`  (
 -- ----------------------------
 -- Records of sys_user_info
 -- ----------------------------
-INSERT INTO `sys_user_info` VALUES (1, 'admin', '电子所', NULL, '管理员', 'e984d05048ac07c56121fa2808894ddf', 'b09f050687cc631d9515d416d09b17e4', 1, 1, '2021-03-18 16:42:01', 1, '2020-09-11 23:40:18', 1, '2021-03-08 15:32:52', 0);
+INSERT INTO `sys_user_info` VALUES (1, 'admin', '电子所', NULL, '管理员', 'e984d05048ac07c56121fa2808894ddf', 'b09f050687cc631d9515d416d09b17e4', 1, 1, '2021-03-19 16:29:46', 1, '2020-09-11 23:40:18', 1, '2021-03-08 15:32:52', 0);
 
 -- ----------------------------
 -- Table structure for sys_user_role_relation
