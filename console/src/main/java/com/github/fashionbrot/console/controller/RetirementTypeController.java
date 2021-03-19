@@ -46,17 +46,13 @@ public class RetirementTypeController {
         return "system/payImport/add";
     }
 
-    @GetMapping("/upload")
-    public String upload() {
-        return "system/payImport/upload";
-    }
 
     @ApiOperation("数据列表—分页")
     @PostMapping("/queryAll")
     @ResponseBody
     public RespVo queryAll(@RequestParam(defaultValue = "1") Integer pageNum,
-                       @RequestParam(defaultValue = "10") Integer pageSize){
-        return  RespVo.success(retirementTypeService.queryAll(pageNum,pageSize));
+                           @RequestParam(defaultValue = "10") Integer pageSize) {
+        return RespVo.success(retirementTypeService.queryAll(pageNum, pageSize));
     }
 
 
@@ -106,9 +102,6 @@ public class RetirementTypeController {
         retirementTypeService.deleteById(id);
         return RespVo.success();
     }
-
-
-
 
 
 }

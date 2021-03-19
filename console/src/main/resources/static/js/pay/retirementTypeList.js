@@ -12,9 +12,7 @@ function queryList() {
         createUrl: prefix + "/index/add",
         updateUrl: prefix + "/index/edit/?id={id}",
         removeUrl: prefix + "/deleteById",
-        // exportUrl: prefix + "/upload",
-        importUrl: prefix + "/upload",
-        // importTemplateUrl: prefix + "/upload",
+        importUrl: "/retirement/payroll/uploadExcel",//excel导入接口
         sortName: "createTime",
         sortOrder: "desc",
         modalName: "离退休",

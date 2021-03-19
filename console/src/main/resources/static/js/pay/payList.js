@@ -45,14 +45,12 @@ function queryList() {
                 field: 'view',
                 title: '是否查看',
                 sortable: false,
-                formatter: function (value, row, index) {
-                    var actions = [];
-                    if(row.view==1){
-                        actions.push('<a class="btn btn-success btn-xs" disabled="disabled"> 已查看</a> ');
-                    }else {
-                        actions.push('<a class="btn btn-default btn-xs" disabled="disabled"> 未查看</a>');
+                formatter: function(value, row, index) {
+                    if (value == 0) {
+                        return '<span class="badge badge-primary">未读</span>';
+                    } else {
+                        return '<span class="badge badge-light">已读</span>';
                     }
-                    return actions.join('');
                 }
             },
             {

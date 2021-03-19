@@ -32,15 +32,12 @@ public class RetirementPayrollItemEntity{
     @TableField("retirement_payroll_id")
     private Long retirementPayrollId;
 
-    @ApiModelProperty(value = "工资项目")
+    @ApiModelProperty(value = "支付名称")
     @TableField("pay_item")
     private String payItem;
 
-    @ApiModelProperty(value = "工资数据")
+    @ApiModelProperty(value = "支付金额")
     @TableField("pay_result")
     private String payResult;
 
-    @ApiModelProperty(value = "单位")
-    @TableField("unit")
-    private String unit;
 }
