@@ -26,7 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author fashionbrot
@@ -53,7 +55,8 @@ public class UserInfoService {
 
     public RespVo login(String userName, String password, HttpServletRequest request, HttpServletResponse response) {
 
-        UserInfo userInfo = userInfoDao.selectOne(new QueryWrapper<UserInfo>().eq("user_name", userName));
+//        UserInfo userInfo = userInfoDao.selectOne(new QueryWrapper<UserInfo>().eq("user_name", userName));
+        UserInfo userInfo = userInfoDao.selectOne(new QueryWrapper<UserInfo>().eq("identity_card", userName));
         if (userInfo == null) {
             throw new MarsException(RespCode.USER_OR_PASSWORD_IS_ERROR);
         }
@@ -105,12 +108,12 @@ public class UserInfoService {
             userInfo.setSuperAdmin(0);
         }
         UserInfo oldUser = queryById(userInfo.getId());
-        if (oldUser != null && !oldUser.getPassword().equals(userInfo.getPassword())) {
-            String salt = PasswordUtils.getSalt();
-            String password = PasswordUtils.encryptPassword(userInfo.getPassword(), salt);
-            userInfo.setSalt(salt);
-            userInfo.setPassword(password);
-        }
+//        if (oldUser != null && !oldUser.getPassword().equals(userInfo.getPassword())) {
+//            String salt = PasswordUtils.getSalt();
+//            String password = PasswordUtils.encryptPassword(userInfo.getPassword(), salt);
+//            userInfo.setSalt(salt);
+//            userInfo.setPassword(password);
+//        }
         int result = userInfoDao.update(userInfo);
         if (result == 1) {
             menuService.clearMenuList();
@@ -141,9 +144,9 @@ public class UserInfoService {
     }
 
 
-    public PageVo queryAll(Integer start, Integer length) {
+    public PageVo queryAll(Integer start, Integer length, String identityCard, String realName) {
         Page page = PageHelper.startPage(start, length);
-        List<UserInfo>  userInfoList = userInfoDao.queryAll();
+        List<UserInfo>  userInfoList = userInfoDao.queryAll(identityCard,realName);
         return PageVo.builder()
                 .rows(userInfoList)
                 .total(page.getTotal())
@@ -182,7 +185,24 @@ public class UserInfoService {
         return RespVo.success();
     }
 
-
+    @Transactional(rollbackFor = Exception.class)
+    public RespVo resetPwd1(Long id) {
+        if(Objects.isNull(id)){
+            throw new MarsException("用户id不能为空");
+        }
+        UserInfo user = userInfoDao.queryById(id);
+        if (user != null) {
+            String salt =user.getSalt();
+            String pwd = user.getIdentityCard().trim().substring(user.getIdentityCard().length() - 6);
+            String password =PasswordUtils.encryptPassword(pwd,salt);
+            user.setPassword(password);
+            int result = userInfoDao.updateById(user);
+            if (result != 1) {
+                throw new MarsException(RespCode.UPDATE_ERROR);
+            }
+        }
+        return RespVo.success();
+    }
 
 
 

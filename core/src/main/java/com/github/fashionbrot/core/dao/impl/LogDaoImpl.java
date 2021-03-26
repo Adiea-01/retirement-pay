@@ -23,4 +23,5 @@ public class LogDaoImpl extends ServiceImpl<LogMapper, LogEntity> implements Log
     public List<LogDTO> selectListByReq(LogReq req) {
         return logMapper.selectListByReq(req);
     }
+
 }

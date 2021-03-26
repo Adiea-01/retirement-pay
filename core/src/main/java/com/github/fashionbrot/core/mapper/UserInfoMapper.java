@@ -17,17 +17,14 @@ import java.util.List;
  * @date 2019/12/8 22:45
  */
 @Repository
-public interface UserInfoMapper extends BaseMapper<UserInfo>{
+public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
 
     @Update("UPDATE sys_user_info SET last_login_time=#{lastLoginTime} WHERE id=#{id}")
     int updateLastLoginTime(@Param("id") Long id, @Param("lastLoginTime") Date timestamp);
 
-    @Select("SELECT a.super_admin,a.id,a.user_name,a.real_name,a.`password`,a.create_date,a.`status`,a.last_login_time,a.update_date,c.role_name,c.id as roleId " +
-            " from sys_user_info a " +
-            " left JOIN sys_user_role_relation b on a.id=b.user_id" +
-            " left JOIN sys_role_info c on c.id=b.role_id where a.del_flag=0 ")
-    List<UserInfo> queryAll();
+
+    List<UserInfo> queryAll(@Param("identityCard") String identityCard, @Param("realName") String realName);
 
     @Select("select r.role_name " +
             "from sys_user_info u " +

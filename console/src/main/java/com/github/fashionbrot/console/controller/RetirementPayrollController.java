@@ -8,11 +8,6 @@ import com.github.fashionbrot.core.service.RetirementPayrollItemService;
 import com.github.fashionbrot.core.service.RetirementPayrollService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
-import jxl.read.biff.WorkbookParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -55,16 +49,22 @@ public class RetirementPayrollController {
         List<RetirementPayrollItemEntity> retirementPayrollItemEntities = retirementPayrollService.queryAllByRetirementPayrollId(id);
         modelMap.put("user", userMap);
         modelMap.put("list", retirementPayrollItemEntities);
+        //修改是否已查看
+        retirementPayrollService.updateById(id);
         return "system/payList/payDetail";
     }
 
 
-    @ApiOperation("查询离退休人员列表")
+    @ApiOperation("查询离退休人员工资列表")
     @PostMapping("/queryAll")
     @ResponseBody
     public RespVo queryAll(@RequestParam(defaultValue = "1") Integer pageNum,
-                           @RequestParam(defaultValue = "10") Integer pageSize) {
-        return RespVo.success(retirementPayrollService.queryAll(pageNum, pageSize));
+                           @RequestParam(defaultValue = "10") Integer pageSize,
+                           @RequestParam("department")String department,
+                           @RequestParam("realName")String realName,
+                           @RequestParam("params[beginTime]")String beginTime,
+                           @RequestParam("params[endTime]")String endTime) {
+        return RespVo.success(retirementPayrollService.queryAll(pageNum, pageSize,department,realName,beginTime,endTime));
     }
 
     @ApiOperation("工资数据导入")
@@ -81,10 +81,6 @@ public class RetirementPayrollController {
         retirementPayrollItemService.uploadExcel(multipartFile);
         return RespVo.success();
     }
-
-
-
-
 
 
 }

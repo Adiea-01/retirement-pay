@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.fashionbrot.core.mapper.RetirementPayrollMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.github.fashionbrot.core.entity.RetirementPayrollEntity">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="personnel_number" property="personnelNumber" />
+        <result column="pay_date" property="payDate" />
+        <result column="retirement_type_id" property="retirementTypeId" />
+        <result column="view" property="view" />
+        <result column="view_date" property="viewDate" />
+        <result column="create_id" property="createId" />
+        <result column="create_date" property="createDate" />
+        <result column="update_id" property="updateId" />
+        <result column="update_date" property="updateDate" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, personnel_number, pay_date, retirement_type_id, `view`, view_date,create_id,create_date,update_id,update_date,del_flag
+    </sql>
+
+    <!--管理员查询体检列表-->
+    <select id="selectAll" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            rpr.id,
+            rpr.personnel_number AS personnelNumber,
+            sui.department,
+            sui.real_name AS realName,
+            rpr.pay_date AS payDate,
+            rpr.`view`,
+            rpr.view_date AS viewDate,
+            rpr.create_date AS createDate,
+            rt.retirement_name AS retirementName
+        FROM
+            retirement_payroll rpr
+        LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id
+        LEFT JOIN retirement_type rt ON rpr.retirement_type_id = rt.id
+        WHERE
+        1 = 1
+        <if test="department != null and department != '' ">
+            AND sui.department like CONCAT('%',#{department},'%')
+        </if>
+        <if test="realName != null and realName != ''">
+            AND sui.real_name like CONCAT('%',#{realName},'%')
+        </if>
+        <if test="beginTime != null and beginTime != ''">
+            AND rpr.pay_date <![CDATA[>=]]> #{beginTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND rpr.pay_date <![CDATA[<=]]> #{endTime}
+        </if>
+    </select>
+
+    <!--登录人查询个人体检列表-->
+    <select id="selectPayrollById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            rpr.id,
+            rpr.personnel_number AS personnelNumber,
+            sui.department,
+            sui.real_name AS realName,
+            rpr.pay_date AS payDate,
+            rpr.`view`,
+            rpr.view_date AS viewDate,
+            rpr.create_date AS createDate,
+            rt.retirement_name AS retirementName
+        FROM
+            retirement_payroll rpr
+        LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id
+        LEFT JOIN retirement_type rt ON rpr.retirement_type_id = rt.id
+        WHERE
+            rpr.user_id = #{id}
+        <if test="department != null and department != '' ">
+            AND sui.department like CONCAT('%',#{department},'%')
+        </if>
+        <if test="realName != null and realName != ''">
+            AND sui.real_name like CONCAT('%',#{realName},'%')
+        </if>
+        <if test="beginTime != null and beginTime != ''">
+            AND rpr.pay_date <![CDATA[>=]]> #{beginTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND rpr.pay_date <![CDATA[<=]]> #{endTime}
+        </if>
+    </select>
+
+
+</mapper>

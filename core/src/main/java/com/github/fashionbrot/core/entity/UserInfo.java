@@ -2,8 +2,7 @@ package com.github.fashionbrot.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.util.Date;
 
@@ -15,17 +14,26 @@ import java.util.Date;
 @Data
 @TableName("sys_user_info")
 @EqualsAndHashCode(callSuper=false)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserInfo extends BaseEntity {
     private static final long serialVersionUID = -6283733291651727199L;
 
     @TableField(value = "user_name")
     private String userName;
 
-    @TableField(value = "password")
-    private String password;
+    @TableField(value = "department")
+    private String department;
+
+    @TableField(value = "identity_card")
+    private String identityCard;
 
     @TableField(value = "real_name")
     private String realName;
+
+    @TableField(value = "password")
+    private String password;
 
     @TableField(value = "salt")
     private String salt;

@@ -26,7 +26,7 @@
         </div>
         <a th:href="@{/index}">
             <li class="logo hidden-xs">
-                <span class="logo-lg">离退休工资查询系统</span>
+                <span class="logo-lg">离退休工资查询</span>
             </li>
          </a>
         <div class="sidebar-collapse">
@@ -107,7 +107,7 @@
 								<i class="fa fa-user"></i> 个人中心</a>
 							</li>-->
 							<li>
-								<a onclick="resetPwd()">
+								<a onclick="changePwd()">
 								<i class="fa fa-key"></i> 修改密码</a>
 							</li>
 							<!--<li>
@@ -193,8 +193,8 @@ if($.common.isNotEmpty(skin)){
 }
 
 /* 用户管理-重置密码 */
-function resetPwd() {
-    var url = ctx + 'system/user/profile/resetPwd';
+function changePwd() {
+    var url = ctx + 'system/user/profile/changePwd';
     $.modal.open("重置密码", url, '770', '380');
 }
 

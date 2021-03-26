@@ -1,5 +1,6 @@
 var editFlag;
 var removeFlag;
+var resetPwdFlag;
 var prefix = ctx + "system/user/";
 $(function () {
 
@@ -25,14 +26,20 @@ function queryList() {
             },
             {
                 width:"20%",
-                field: 'userName',
+                field: 'department',
+                title: '单位',
+                sortable: false
+            },
+            {
+                width:"20%",
+                field: 'identityCard',
                 title: '登录账号',
                 sortable: false
             },
             {
                 width:"20%",
                 field: 'realName',
-                title: '账号名称'
+                title: '用户名'
             },
             {
                 width:"20%",
@@ -55,8 +62,9 @@ function queryList() {
                 align: 'center',
                 formatter: function (value, row, index) {
                     var actions = [];
-                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\',800,400)"><i class="fa fa-edit"></i>编辑</a> ');
-                    actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ');
+                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\',800,400)"><i class="fa fa-edit"></i> 编辑</a> ');
+                    actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i> 删除</a> ');
+                    actions.push('<a class="btn btn-warning btn-xs ' + resetPwdFlag + '" href="javascript:void(0)" onclick="resetPwd1(\'' + row.id + '\')"><i class="fa fa-key"></i> 重置密码</a> ');
                     return actions.join('');
                 }
             }]
@@ -68,8 +76,39 @@ function queryList() {
 /* 用户状态显示 */
 function statusTools(row) {
     if (row.status == 1) {
-        return '开启';
+        return '<span class="badge badge-primary">开启</span>';
     } else {
-        return '关闭';
+        return '<span class="badge badge-light">关闭</span>';
     }
 }
+
+
+/* 用户管理-重置密码 */
+function resetPwd1(id) {
+    var url = prefix + 'resetPwd1?id=' + id;
+    layer.confirm("确认是否重置密码?", {
+        icon: 3,
+        title: "系统提示",
+        btn: ['确认', '取消']
+    }, function (index) {
+        reset(url);
+    });
+}
+/*重置密码回调函数*/
+function reset(url) {
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            $.modal.msgSuccess(data.msg)
+        },
+        error: function (msg) {
+            $.modal.msgError(data.msg)
+        }
+
+    })
+}
+
+

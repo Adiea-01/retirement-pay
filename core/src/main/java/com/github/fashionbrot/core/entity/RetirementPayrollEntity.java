@@ -30,10 +30,6 @@ public class RetirementPayrollEntity extends BaseEntity {
 	@TableField("user_id")
 	private Long userId;
 
-	@ApiModelProperty(value = "身份证号")
-	@TableField("identity_card")
-	private String identityCard;
-
 	@ApiModelProperty(value = "人员编号")
 	@TableField("personnel_number")
 	private String personnelNumber;
@@ -44,7 +40,7 @@ public class RetirementPayrollEntity extends BaseEntity {
 
 	@ApiModelProperty(value = "离退休分类id")
 	@TableField("retirement_type_id")
-	private String retirementTypeId;
+	private Long retirementTypeId;
 
 	@ApiModelProperty(value = "是否查看 1：已查看；0：未查看")
 	@TableField("view")

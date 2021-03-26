@@ -22,7 +22,7 @@ public class RetirementTypeDao {
     @Autowired
     private RetirementTypeMapper retirementTypeMapper;
 
-    public int updateAllByDefaultFlag(){
+    public int updateAllByDefaultFlag() {
         return retirementTypeMapper.updateAllByDefaultFlag(0);
     }
 
@@ -30,12 +30,12 @@ public class RetirementTypeDao {
         return retirementTypeMapper.selectList(queryWrapper);
     }
 
-    public int add(RetirementTypeEntity retirementTypeEntity){
+    public int add(RetirementTypeEntity retirementTypeEntity) {
         retirementTypeEntity.setCreateDate(new Date());
         return retirementTypeMapper.insert(retirementTypeEntity);
     }
 
-    public int updateDefaultFlag(Long id){
+    public int updateDefaultFlag(Long id) {
         //先把全部都设置为0，再对当前id设置为默认
         retirementTypeMapper.updateAllByDefaultFlag(0);
         return retirementTypeMapper.updateDefaultFlagById(1, id);
@@ -57,5 +57,9 @@ public class RetirementTypeDao {
     }
 
 
+    public RetirementTypeEntity queryDefaultFlag() {
+        RetirementTypeEntity retirementTypeEntity = retirementTypeMapper.selectOne(new QueryWrapper<RetirementTypeEntity>().eq("default_flag", 1));
+        return retirementTypeEntity;
+    }
 
 }

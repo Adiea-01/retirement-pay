@@ -15,10 +15,12 @@ import java.util.Map;
  */
 public interface RetirementPayrollService {
 
-    PageVo queryAll(Integer start, Integer length);
+    PageVo queryAll(Integer start, Integer length,String department,String realName,String beginTime,String endTime);
 
     Map<String, Object> selectAllById(Long id);
 
     List<RetirementPayrollItemEntity> queryAllByRetirementPayrollId(Long id);
+
+    int updateById(Long id);
 
 }

@@ -52,7 +52,7 @@ public class UserInfoController {
         return "system/user/edit" ;
     }
 
-    @GetMapping("/profile/resetPwd")
+    @GetMapping("/profile/changePwd")
     public String test(ModelMap mmap) {
         LoginModel loginModel = userLoginService.getLogin();
         mmap.put("user", loginModel);
@@ -81,6 +81,14 @@ public class UserInfoController {
     @MarsPermission("system:user:resetPwd")
     public RespVo resetPwd(String oldPassword, String newPassword) {
         return userInfoService.resetPwd(oldPassword, newPassword);
+    }
+
+    @PersistentLog
+    @RequestMapping("/resetPwd1")
+    @ResponseBody
+    @MarsPermission("system:user:resetPwd")
+    public RespVo resetPwd1(@RequestParam("id")Long id) {
+        return userInfoService.resetPwd1(id);
     }
 
     @PersistentLog
@@ -122,8 +130,10 @@ public class UserInfoController {
     @ResponseBody
     @MarsPermission("system:user:page")
     public RespVo queryAll(@RequestParam(defaultValue = "1") Integer pageNum,
-                           @RequestParam(defaultValue = "20") Integer pageSize) {
-        return RespVo.success(userInfoService.queryAll(pageNum, pageSize));
+                           @RequestParam(defaultValue = "20") Integer pageSize,
+                           @RequestParam("identityCard") String identityCard,
+                           @RequestParam("realName") String realName) {
+        return RespVo.success(userInfoService.queryAll(pageNum, pageSize,identityCard,realName));
     }
 
     @RequestMapping("queryRoleAll")

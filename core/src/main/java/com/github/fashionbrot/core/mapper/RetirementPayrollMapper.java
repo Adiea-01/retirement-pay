@@ -20,23 +20,14 @@ import java.util.Map;
 @Mapper
 public interface RetirementPayrollMapper extends BaseMapper<RetirementPayrollEntity> {
 
+    //管理员查询体检列表
+    List<Map<String, Object>> selectAll(Map<String, Object> map);
 
-    @Select("SELECT rpr.id,rpr.personnel_number AS personnelNumber,sui.department,sui.real_name AS realName,rpr.pay_date AS payDate,rpr.`view`,rpr.view_date AS viewDate,rpr.create_date AS createDate,rt.retirement_name AS retirementName FROM retirement_payroll rpr " +
-            "LEFT JOIN sys_user_info sui ON rpr.identity_card=sui.identity_card " +
-            "LEFT JOIN retirement_type rt ON rpr.retirement_type_id=rt.id")
-    List<Map<String, Object>> selectAll();
+    //登录人查询个人体检列表
+    List<Map<String, Object>> selectPayrollById(Map<String, Object> map);
 
-    @Select("SELECT rpr.id,rpr.personnel_number AS personnelNumber,sui.department,sui.real_name AS realName,rpr.pay_date AS payDate,rpr.`view`,rpr.view_date AS viewDate,rpr.create_date AS createDate,rt.retirement_name AS retirementName FROM retirement_payroll rpr " +
-            "LEFT JOIN sys_user_info sui ON rpr.identity_card=sui.identity_card " +
-            "LEFT JOIN retirement_type rt ON rpr.retirement_type_id=rt.id " +
-            "WHERE rpr.identity_card=#{identityCard}")
-    List<Map<String, Object>> selectAllByIdentityCard(@Param("identityCard") String identityCard);
-
-//    @Select("SELECT rpr.id,sui.department,sui.real_name AS realName,rpr.personnel_number AS personnelNumber,rpr.pay_date AS payDate FROM retirement_payroll rpr " +
-//            "LEFT JOIN sys_user_info sui ON rpr.identity_card = sui.identity_card " +
-//            "WHERE rpr.id=#{id} AND rpr.del_flag=0 AND sui.del_flag=0")
     @Select("SELECT rpr.id,sui.department,sui.real_name AS realName,rpr.personnel_number AS personnelNumber,rpr.pay_date AS payDate FROM retirement_payroll rpr " +
-            "LEFT JOIN sys_user_info sui ON rpr.identity_card = sui.identity_card " +
+            "LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id " +
             "WHERE rpr.id=#{id}")
     Map<String, Object> selectAllById(@Param("id") Long id);
 

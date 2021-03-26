@@ -11,38 +11,36 @@
 	}
 	ul.list-group {
 		display: -webkit-flex;
-		justify-content: space-between;
 		flex-direction: row;
 		flex-wrap: wrap;
+		background: #eee;
 	}
 	li.list-group-item {
-		width: 24%;
+		width: 30%;
 		text-align: center;
-		margin-bottom: 10px;
+		/*margin-bottom: 0px;*/
+		margin-right: 7px;
+		background: #fff;
+		margin-left: 10px;
+		margin-top: 10px;
+
 	}
+	.list-group-item{
+		font-size: 20px;
+	}
+	.list-group-item:last-child {
+		 margin-bottom:0px;
+	}
+	label.control-label {
+		margin-left: 3%;
+	}
+
 </style>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 	<form class="form-horizontal m-t" id="payItemForm">
-		<!--<div class="form-group">
-			<label class="col-sm-2 control-label">操作模块：</label>
-			<div class="form-control-static" th:text="${operLog.title} + ' / ' + ${@dict.getLabel('sys_oper_type',operLog.businessType)}">
-			</div>
-		</div>-->
-<!--		<div class="form-group">-->
-<!--			<h4 style="color: #0e9aef">-->
-<!--				<label class="col-sm-2 control-label">人员编号：</label>-->
-<!--				<div class="form-control-static" th:text="${user.get('personnelNumber')}"/>-->
-<!--				<label class="col-sm-2 control-label">单位：</label>-->
-<!--				<div class="form-control-static" th:text="${user.get('department')}"/>-->
-<!--				<label class="col-sm-2 control-label">姓名：</label><br>-->
-<!--				<div class="form-control-static" th:text="${user.get('realName')}"/>-->
-<!--				<label class="col-sm-2 control-label">支付日期：</label>-->
-<!--				<div class="form-control-static" th:text="${user.get('payDate')}"/>-->
-<!--			</h4>-->
-<!--		</div>-->
 		<div class="panel panel-default">
-			<div class="panel-body panel-body_4">
+			<div class="panel-body panel-body_4 list-group-item active">
 				<label class=" control-label">人员编号：</label>
 				<div class="form-control-static" th:text="${user.get('personnelNumber')}"/>
 				<label class="control-label">单位：</label>
@@ -51,9 +49,6 @@
 				<div class="form-control-static" th:text="${user.get('realName')}"/>
 				<label class=" control-label">支付日期：</label>
 				<div class="form-control-static" th:text="${user.get('payDate')}"/>
-<!--				<h4 style="color: #0e9aef" class="panel-body_4">-->
-<!--					-->
-<!--				</h4>-->
 			</div>
 			<div class="panel-body">
 				<ul class="list-group">
@@ -61,47 +56,24 @@
 					   <p th:text="${items['payItem']}"></p>
 					 	<p th:text="${items['payResult']}"></p>
 					 </li>
-
-<!--					<li class="list-group-item"  th:each="items,start:${list}"-->
-<!--					<p th:text="${items['payResult']}"></p>-->
-<!--					</li>-->
-<!--					<li class="list-group-item">Dapibus ac facilisis in</li>-->
-<!--					<li class="list-group-item">Morbi leo risus</li>-->
-<!--					<li class="list-group-item">Porta ac consectetur ac</li>-->
-<!--					<li class="list-group-item">Vestibulum at eros</li>-->
 				</ul>
 			</div>
 		</div>
-
-<!--		<table>-->
-<!--			<thead>-->
-<!--				<th>序号</th>-->
-<!--				<th>支付项目</th>-->
-<!--				<th>支付金额</th>-->
-<!--				<th>单位</th>-->
-<!--			</thead>-->
-<!--			<tbody>-->
-<!--				<tr th:each="items,start:${list}">-->
-<!--					<td th:text="${items['id']}">-->
-<!--						<div>-->
-
-<!--						</div>-->
-<!--					</td>-->
-<!--					<td>-->
-<!--						<span th:text="${items['payItem']}"></span>:<span th:text="${items['payResult']}"></span>-->
-<!--					</td>-->
-<!--&lt;!&ndash;					<td th:text="${items['payResult']}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;					<td th:text="${items['unit']}"></td>&ndash;&gt;-->
-<!--				</tr>-->
-<!--			</tbody>-->
-<!--		</table>-->
 
 	</form>
     </div>
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: jsonview-js" />
     <script th:inline="javascript">
-
+		// $(function() {
+		// 	$('.list-group .list-group-item').each(function(i) {
+		// 		if (i % 2) {
+		// 			$(this).css({
+		// 				'background': '#eee'
+		// 			})
+		// 		}
+		// 	})
+		// })
     </script>
 </body>
 </html>

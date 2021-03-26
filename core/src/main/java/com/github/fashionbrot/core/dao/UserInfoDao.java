@@ -55,7 +55,8 @@ public class UserInfoDao  {
         String password = PasswordUtils.encryptPassword(userInfo.getPassword(),salt);
         userInfo.setSalt(salt);
         userInfo.setPassword(password);
-        int count= userInfoMapper.selectCount(new QueryWrapper<UserInfo>().eq("user_name",userInfo.getUserName()));
+//        int count= userInfoMapper.selectCount(new QueryWrapper<UserInfo>().eq("user_name",userInfo.getUserName()));
+        int count= userInfoMapper.selectCount(new QueryWrapper<UserInfo>().eq("identity_card",userInfo.getIdentityCard()));
         if (count>0){
             throw new MarsException("用户名已存在，请重新输入");
         }
@@ -138,8 +139,8 @@ public class UserInfoDao  {
     }
 
 
-    public List<UserInfo> queryAll() {
-        return userInfoMapper.queryAll();
+    public List<UserInfo> queryAll(String identityCard, String realName) {
+        return userInfoMapper.queryAll(identityCard,realName);
     }
 
 
