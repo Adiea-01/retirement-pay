@@ -26,7 +26,7 @@ public interface RetirementPayrollMapper extends BaseMapper<RetirementPayrollEnt
     //登录人查询个人体检列表
     List<Map<String, Object>> selectPayrollById(Map<String, Object> map);
 
-    @Select("SELECT rpr.id,sui.department,sui.real_name AS realName,rpr.personnel_number AS personnelNumber,rpr.pay_date AS payDate FROM retirement_payroll rpr " +
+    @Select("SELECT rpr.id,sui.department,sui.real_name AS realName,rpr.personnel_number AS personnelNumber,LEFT(rpr.pay_date, 7) AS payDate FROM retirement_payroll rpr " +
             "LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id " +
             "WHERE rpr.id=#{id}")
     Map<String, Object> selectAllById(@Param("id") Long id);

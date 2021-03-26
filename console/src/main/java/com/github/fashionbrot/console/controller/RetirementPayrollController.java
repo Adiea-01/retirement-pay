@@ -42,6 +42,12 @@ public class RetirementPayrollController {
         return "system/payList/list";
     }
 
+    /**
+     * 查看工资详情
+     * @param id
+     * @param modelMap
+     * @return
+     */
     @GetMapping("/index/payDetail")
     @MarsPermission("system:payroll:index:detail")
     public String payDetail(Long id, ModelMap modelMap) {

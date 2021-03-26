@@ -30,10 +30,12 @@
             rpr.personnel_number AS personnelNumber,
             sui.department,
             sui.real_name AS realName,
-            rpr.pay_date AS payDate,
+            LEFT(rpr.pay_date, 7) AS payDate,
             rpr.`view`,
-            rpr.view_date AS viewDate,
-            rpr.create_date AS createDate,
+--             rpr.view_date AS viewDate,
+--             rpr.create_date AS createDate,
+            LEFT(rpr.view_date, 19) AS viewDate,
+            LEFT(rpr.create_date, 19) AS createDate,
             rt.retirement_name AS retirementName
         FROM
             retirement_payroll rpr
@@ -62,10 +64,12 @@
             rpr.personnel_number AS personnelNumber,
             sui.department,
             sui.real_name AS realName,
-            rpr.pay_date AS payDate,
+            LEFT(rpr.pay_date, 7) AS payDate,
             rpr.`view`,
-            rpr.view_date AS viewDate,
-            rpr.create_date AS createDate,
+--             rpr.view_date AS viewDate,
+--             rpr.create_date AS createDate,
+            LEFT(rpr.view_date, 19) AS viewDate,
+            LEFT(rpr.create_date, 19) AS createDate,
             rt.retirement_name AS retirementName
         FROM
             retirement_payroll rpr

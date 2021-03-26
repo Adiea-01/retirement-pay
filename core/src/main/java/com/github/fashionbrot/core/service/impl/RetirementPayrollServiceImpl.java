@@ -11,10 +11,12 @@ import com.github.fashionbrot.core.service.UserLoginService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -51,8 +53,15 @@ public class RetirementPayrollServiceImpl implements RetirementPayrollService {
         List<Map<String, Object>> list = null;
         if (model != null) {
             if (model.isSuperAdmin()) {
+                //如果是管理员查看工资列表，则默认查看当前月份的工资
+                if(StringUtils.isEmpty(beginTime)){
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+                    String beginDate=simpleDateFormat.format(new Date());
+                    map.put("beginTime", beginDate);
+                }
                 list = retirementPayrollDao.selectAll(map);
             } else {
+                //如果是用户查看工资，则可查看自己所有月份的工资
                 map.put("id", model.getUserId());
                 list = retirementPayrollDao.selectPayrollById(map);
             }
