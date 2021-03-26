@@ -11,7 +11,7 @@
  Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 19/03/2021 17:05:16
+ Date: 26/03/2021 15:35:21
 */
 
 SET NAMES utf8mb4;
@@ -24,7 +24,6 @@ DROP TABLE IF EXISTS `retirement_payroll`;
 CREATE TABLE `retirement_payroll`  (
   `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `user_id` bigint(11) NULL DEFAULT NULL COMMENT '用户id',
-  `identity_card` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '身份证号',
   `personnel_number` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '人员编号',
   `pay_date` date NULL DEFAULT NULL COMMENT '支付日期',
   `retirement_type_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '离退休分类id',
@@ -36,13 +35,12 @@ CREATE TABLE `retirement_payroll`  (
   `update_date` datetime(0) NULL DEFAULT NULL COMMENT '修改日期',
   `del_flag` int(1) NULL DEFAULT 0 COMMENT '删除标志位 1删除 0未删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 69110 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '离退休工资单管理表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 69117 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '离退休工资单管理表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of retirement_payroll
 -- ----------------------------
-INSERT INTO `retirement_payroll` VALUES (28618, NULL, '110102193512132726', '1404250061', '2014-06-06', 'c199fd5d58bd4fd990a951ce3ebe35bb', 1, NULL, NULL, '2021-03-05 01:12:11', NULL, NULL, 0);
-INSERT INTO `retirement_payroll` VALUES (28619, NULL, '110108193806266023', '1404250062', '2014-06-03', 'c199fd5d58bd4fd990a951ce3ebe35bb', 0, NULL, NULL, '2021-03-05 01:12:12', NULL, NULL, 0);
+INSERT INTO `retirement_payroll` VALUES (69116, 297, '00054', '2016-07-01', '7319221', 1, '2021-03-26 15:14:51', 1, '2021-03-25 17:20:57', 1, '2021-03-26 15:14:51', 0);
 
 -- ----------------------------
 -- Table structure for retirement_payroll_item
@@ -54,13 +52,25 @@ CREATE TABLE `retirement_payroll_item`  (
   `pay_item` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付名称',
   `pay_result` varchar(3000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付金额',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7319221 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '离退休工资数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7319249 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '离退休工资数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of retirement_payroll_item
 -- ----------------------------
-INSERT INTO `retirement_payroll_item` VALUES (1, 28618, '公积金', '2000');
-INSERT INTO `retirement_payroll_item` VALUES (2, 28618, '退休工资', '50900');
+INSERT INTO `retirement_payroll_item` VALUES (7319235, 69116, '统筹支付', '1855.1');
+INSERT INTO `retirement_payroll_item` VALUES (7319236, 69116, '院应付', '8337');
+INSERT INTO `retirement_payroll_item` VALUES (7319237, 69116, '防暑降温费', '240');
+INSERT INTO `retirement_payroll_item` VALUES (7319238, 69116, '电费', '2');
+INSERT INTO `retirement_payroll_item` VALUES (7319239, 69116, '水费', '0');
+INSERT INTO `retirement_payroll_item` VALUES (7319240, 69116, '房租', '0');
+INSERT INTO `retirement_payroll_item` VALUES (7319241, 69116, '综合', '5');
+INSERT INTO `retirement_payroll_item` VALUES (7319242, 69116, '卫视', '5');
+INSERT INTO `retirement_payroll_item` VALUES (7319243, 69116, '卫生', '3');
+INSERT INTO `retirement_payroll_item` VALUES (7319244, 69116, '物业总扣款', '15');
+INSERT INTO `retirement_payroll_item` VALUES (7319245, 69116, '其他扣款', '0');
+INSERT INTO `retirement_payroll_item` VALUES (7319246, 69116, '扣款合计', '15');
+INSERT INTO `retirement_payroll_item` VALUES (7319247, 69116, '备用费用', '0');
+INSERT INTO `retirement_payroll_item` VALUES (7319248, 69116, '实发合计', '8562');
 
 -- ----------------------------
 -- Table structure for retirement_type
@@ -107,72 +117,26 @@ CREATE TABLE `sys_log`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_del_flagAndinterface_type`(`del_flag`, `interface_type`) USING BTREE,
   INDEX `index_create_id`(`create_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 95 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 219 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
 -- ----------------------------
-INSERT INTO `sys_log` VALUES (57, '', '/retirement/type/update', 'POST', '0:0:0:0:0:0:0:1', '[{\"delFlag\":0,\"id\":7319221,\"retirementName\":\"离休1\",\"updateDate\":1615531188644,\"updateId\":1}]', 'update', 1, 1, 1, NULL, '2021-03-12 14:39:51', NULL, 0);
-INSERT INTO `sys_log` VALUES (56, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-12 14:11:58', NULL, 0);
-INSERT INTO `sys_log` VALUES (54, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-11 18:36:54', NULL, 0);
-INSERT INTO `sys_log` VALUES (55, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-12 09:17:11', NULL, 0);
-INSERT INTO `sys_log` VALUES (53, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-11 17:59:00', NULL, 0);
-INSERT INTO `sys_log` VALUES (52, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, 1, NULL, '2021-03-11 10:51:00', NULL, 0);
-INSERT INTO `sys_log` VALUES (50, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-11 10:04:44', NULL, 0);
-INSERT INTO `sys_log` VALUES (51, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-11 10:41:51', NULL, 0);
-INSERT INTO `sys_log` VALUES (48, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-10 16:16:48', NULL, 0);
-INSERT INTO `sys_log` VALUES (49, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-10 16:55:39', NULL, 0);
-INSERT INTO `sys_log` VALUES (47, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:56:56', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (46, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:50:04', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (45, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:49:51', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (44, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:49:11', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (43, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:47:30', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (42, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:46:47', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (41, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-10 15:46:44', NULL, 0);
-INSERT INTO `sys_log` VALUES (40, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:17:33', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (39, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:17:27', 'nested exception is org.apache.ibatis.executor.ExecutorException: No constructor found in com.github.fashionbrot.core.entity.RetirementTypeEntity matching [java.lang.Long, java.lang.String, java.lang.Integer, java.lang.Long, java.sql.Timestamp, java.lang.Long, java.sql.Timestamp, java.lang.Integer]', 0);
-INSERT INTO `sys_log` VALUES (38, '离退休分类表-数据列表—分页', '/retirement/type/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-10 15:16:01', '\r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'update_id\' in \'field list\'\r\n### The error may exist in com/github/fashionbrot/core/mapper/RetirementTypeMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT  id,retirement_name,default_flag,create_id,create_date,update_id,update_date,del_flag  FROM retirement_type  WHERE  del_flag=0 LIMIT ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'update_id\' in \'field list\'\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'update_id\' in \'field list\'', 0);
-INSERT INTO `sys_log` VALUES (36, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-10 15:13:52', NULL, 0);
-INSERT INTO `sys_log` VALUES (37, '离退休分类表-新增', '/retirement/type/add', 'POST', '0:0:0:0:0:0:0:1', '{\"retirementName\":[\"离休\"]}', 'add', 2, 1, 1, NULL, '2021-03-10 15:14:31', '\r\n### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\r\n### The error may involve com.github.fashionbrot.core.mapper.RetirementTypeMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO retirement_type  ( retirement_name, default_flag, create_id, create_date,   del_flag )  VALUES  ( ?, ?, ?, ?,   ? )\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'', 0);
-INSERT INTO `sys_log` VALUES (35, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-10 14:26:40', NULL, 0);
-INSERT INTO `sys_log` VALUES (34, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-10 14:13:56', NULL, 0);
-INSERT INTO `sys_log` VALUES (58, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-12 14:44:09', NULL, 0);
-INSERT INTO `sys_log` VALUES (59, '离退休分类表-修改离退休名称', '/retirement/type/update', 'POST', '0:0:0:0:0:0:0:1', '[{\"delFlag\":0,\"id\":7319221,\"retirementName\":\"离休\",\"updateDate\":1615531462505,\"updateId\":1}]', 'update', 1, 1, 1, NULL, '2021-03-12 14:44:25', NULL, 0);
-INSERT INTO `sys_log` VALUES (60, '离退休分类表-修改当前默认', '/retirement/type/updateDefaultFlag', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319221\"]}', 'updateDefaultFlag', 1, 1, 1, NULL, '2021-03-12 14:53:40', NULL, 0);
-INSERT INTO `sys_log` VALUES (61, '离退休分类表-根据id删除', '/retirement/type/deleteById', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319223\"]}', 'deleteById', 1, 1, 1, NULL, '2021-03-12 14:53:58', NULL, 0);
-INSERT INTO `sys_log` VALUES (62, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-12 15:41:13', NULL, 0);
-INSERT INTO `sys_log` VALUES (63, '离退休分类表-根据id删除', '/retirement/type/deleteById', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319221\"]}', 'deleteById', 2, 1, 1, NULL, '2021-03-12 15:41:27', '该数据作为当前默认，不能删除', 0);
-INSERT INTO `sys_log` VALUES (64, '离退休分类表-根据id删除', '/retirement/type/deleteById', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319221\"]}', 'deleteById', 2, 1, 1, NULL, '2021-03-12 15:41:44', '该数据作为当前默认，不能删除', 0);
-INSERT INTO `sys_log` VALUES (65, '离退休分类表-修改当前默认', '/retirement/type/updateDefaultFlag', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319223\"]}', 'updateDefaultFlag', 1, 1, 1, NULL, '2021-03-12 15:45:45', NULL, 0);
-INSERT INTO `sys_log` VALUES (66, '离退休分类表-修改当前默认', '/retirement/type/updateDefaultFlag', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319221\"]}', 'updateDefaultFlag', 1, 1, 1, NULL, '2021-03-12 15:51:59', NULL, 0);
-INSERT INTO `sys_log` VALUES (67, '离退休分类表-根据id删除', '/retirement/type/deleteById', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319221\"]}', 'deleteById', 2, 1, 1, NULL, '2021-03-12 15:52:05', '该数据作为当前默认，不能删除', 0);
-INSERT INTO `sys_log` VALUES (68, '离退休分类表-修改当前默认', '/retirement/type/updateDefaultFlag', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319223\"]}', 'updateDefaultFlag', 1, 1, 1, NULL, '2021-03-12 15:52:07', NULL, 0);
-INSERT INTO `sys_log` VALUES (69, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-12 16:22:14', NULL, 0);
-INSERT INTO `sys_log` VALUES (70, '', '/system/menu/update', 'POST', '0:0:0:0:0:0:0:1', '[{\"active\":0,\"checked\":false,\"code\":\"retirement:payroll:index\",\"delFlag\":0,\"icon\":\"fa fa-envelope-open-o\",\"id\":51,\"isRefresh\":0,\"menuLevel\":2,\"menuName\":\"工资列表\",\"menuUrl\":\"/retirement/payroll/index\",\"open\":false,\"parentMenuId\":50,\"priority\":601,\"target\":\"menuItem\",\"updateDate\":1615537382815,\"updateId\":1,\"visible\":\"0\"}]', 'update', 1, 1, 1, NULL, '2021-03-12 16:23:03', NULL, 0);
-INSERT INTO `sys_log` VALUES (71, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 10:15:30', NULL, 0);
-INSERT INTO `sys_log` VALUES (72, '离退休工资管理-查询离退休人员列表', '/retirement/payroll/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-18 10:18:21', '\r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\r\n### The error may exist in com/github/fashionbrot/core/mapper/RetirementPayrollMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select count(0) from (SELECT  id,user_id,identity_card,personnel_number,pay_date,retirement_type_id,view,view_date,create_id,create_date,update_id,update_date,del_flag  FROM retirement_payroll  WHERE  del_flag=0) tmp_count\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'', 0);
-INSERT INTO `sys_log` VALUES (73, '离退休工资管理-查询离退休人员列表', '/retirement/payroll/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-18 10:19:02', '\r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\r\n### The error may exist in com/github/fashionbrot/core/mapper/RetirementPayrollMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select count(0) from (SELECT  id,user_id,identity_card,personnel_number,pay_date,retirement_type_id,view,view_date,create_id,create_date,update_id,update_date,del_flag  FROM retirement_payroll  WHERE  del_flag=0) tmp_count\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'', 0);
-INSERT INTO `sys_log` VALUES (74, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 11:04:50', NULL, 0);
-INSERT INTO `sys_log` VALUES (75, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 11:17:04', NULL, 0);
-INSERT INTO `sys_log` VALUES (76, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 14:08:34', NULL, 0);
-INSERT INTO `sys_log` VALUES (77, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 15:04:48', NULL, 0);
-INSERT INTO `sys_log` VALUES (78, '', '/retirement/payroll/index/payDetail', 'GET', '0:0:0:0:0:0:0:1', '{\"id\":[\"28618\"]}', 'payDetail', 2, 1, 1, NULL, '2021-03-18 15:06:23', '\r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\r\n### The error may exist in com/github/fashionbrot/core/mapper/RetirementPayrollItemMapper.java (best guess)\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT  id,retirement_payroll_id,pay_item,pay_result,unit,create_id,create_date,update_id,update_date,del_flag  FROM retirement_payroll_item  WHERE  del_flag=0   AND retirement_payroll_id = ?\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'create_id\' in \'field list\'', 0);
-INSERT INTO `sys_log` VALUES (79, '', '/retirement/payroll/index/payDetail', 'GET', '0:0:0:0:0:0:0:1', '{\"id\":[\"28618\"]}', 'payDetail', 2, 1, 1, NULL, '2021-03-18 15:08:37', 'java.lang.NullPointerException <br/>	at com.github.fashionbrot.core.service.impl.RetirementPayrollServiceImpl.queryDetail(RetirementPayrollServiceImpl.java:61) <br/>	at com.github.fashionbrot.console.controller.RetirementPayrollController.payDetail(RetirementPayrollController.java:38) <br/>	at com.github.fashionbrot.console.controller.RetirementPayrollController$$FastClassBySpringCGLIB$$abb6508c.invoke(<generated>) <br/>	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) <br/>	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:749) <br/>	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) <br/>	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:88) <br/>	at com.github.fashionbrot.console.aop.BackStageAspect.around(BackStageAspect.java:72) <br/>	at sun.reflect.NativeMethodAccessorIm', 0);
-INSERT INTO `sys_log` VALUES (80, '', '/retirement/payroll/index/payDetail', 'GET', '0:0:0:0:0:0:0:1', '{\"id\":[\"28618\"]}', 'payDetail', 2, 1, 1, NULL, '2021-03-18 15:09:23', 'java.lang.NullPointerException <br/>	at com.github.fashionbrot.core.service.impl.RetirementPayrollServiceImpl.queryDetail(RetirementPayrollServiceImpl.java:61) <br/>	at com.github.fashionbrot.console.controller.RetirementPayrollController.payDetail(RetirementPayrollController.java:38) <br/>	at com.github.fashionbrot.console.controller.RetirementPayrollController$$FastClassBySpringCGLIB$$abb6508c.invoke(<generated>) <br/>	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) <br/>	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:749) <br/>	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) <br/>	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:88) <br/>	at com.github.fashionbrot.console.aop.BackStageAspect.around(BackStageAspect.java:72) <br/>	at sun.reflect.NativeMethodAccessorIm', 0);
-INSERT INTO `sys_log` VALUES (81, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 15:41:28', NULL, 0);
-INSERT INTO `sys_log` VALUES (82, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 16:11:53', NULL, 0);
-INSERT INTO `sys_log` VALUES (83, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 16:42:01', NULL, 0);
-INSERT INTO `sys_log` VALUES (84, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-18 17:18:15', NULL, 0);
-INSERT INTO `sys_log` VALUES (85, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 09:03:10', NULL, 0);
-INSERT INTO `sys_log` VALUES (86, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 09:38:59', NULL, 0);
-INSERT INTO `sys_log` VALUES (87, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, 1, NULL, '2021-03-19 09:50:03', NULL, 0);
-INSERT INTO `sys_log` VALUES (88, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 10:27:53', NULL, 0);
-INSERT INTO `sys_log` VALUES (89, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 10:59:48', NULL, 0);
-INSERT INTO `sys_log` VALUES (90, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 14:09:44', NULL, 0);
-INSERT INTO `sys_log` VALUES (91, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 15:20:16', NULL, 0);
-INSERT INTO `sys_log` VALUES (92, '离退休分类表-修改当前默认', '/retirement/type/updateDefaultFlag', 'POST', '0:0:0:0:0:0:0:1', '{\"id\":[\"7319221\"]}', 'updateDefaultFlag', 1, 1, 1, NULL, '2021-03-19 15:20:41', NULL, 0);
-INSERT INTO `sys_log` VALUES (93, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 15:54:14', NULL, 0);
-INSERT INTO `sys_log` VALUES (94, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-19 16:29:47', NULL, 0);
+INSERT INTO `sys_log` VALUES (218, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-26 15:10:33', NULL, 0);
+INSERT INTO `sys_log` VALUES (217, '', '/retirement/payroll/index/payDetail', 'GET', '0:0:0:0:0:0:0:1', '{\"id\":[\"69116\"]}', 'payDetail', 2, 1, 297, NULL, '2021-03-26 14:50:45', ' <br/>### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'FROM retirement_payroll rpr LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id \' at line 1 <br/>### The error may exist in com/github/fashionbrot/core/mapper/RetirementPayrollMapper.java (best guess) <br/>### The error may involve com.github.fashionbrot.core.mapper.RetirementPayrollMapper.selectAllById-Inline <br/>### The error occurred while setting parameters <br/>### SQL: SELECT rpr.id,sui.department,sui.real_name AS realName,rpr.personnel_number AS personnelNumber,LEFT(rpr.pay_date, 7) AS payDate, FROM retirement_payroll rpr LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id WHERE rpr.id=? <br/>### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL', 0);
+INSERT INTO `sys_log` VALUES (215, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"110102192101252315\"],\"password\":[\"252315\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-26 14:46:59', NULL, 0);
+INSERT INTO `sys_log` VALUES (216, '', '/retirement/payroll/index/payDetail', 'GET', '0:0:0:0:0:0:0:1', '{\"id\":[\"69116\"]}', 'payDetail', 2, 1, 297, NULL, '2021-03-26 14:50:35', ' <br/>### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'FROM retirement_payroll rpr LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id \' at line 1 <br/>### The error may exist in com/github/fashionbrot/core/mapper/RetirementPayrollMapper.java (best guess) <br/>### The error may involve com.github.fashionbrot.core.mapper.RetirementPayrollMapper.selectAllById-Inline <br/>### The error occurred while setting parameters <br/>### SQL: SELECT rpr.id,sui.department,sui.real_name AS realName,rpr.personnel_number AS personnelNumber,LEFT(rpr.pay_date, 7) AS payDate, FROM retirement_payroll rpr LEFT JOIN sys_user_info sui ON rpr.user_id = sui.id WHERE rpr.id=? <br/>### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL', 0);
+INSERT INTO `sys_log` VALUES (214, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-26 14:36:15', NULL, 0);
+INSERT INTO `sys_log` VALUES (213, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"110102192101252315\"],\"password\":[\"252315\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-25 17:26:20', NULL, 0);
+INSERT INTO `sys_log` VALUES (212, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-25 17:20:05', NULL, 0);
+INSERT INTO `sys_log` VALUES (211, '离退休工资管理-查询离退休人员工资列表', '/retirement/payroll/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"],\"deptId\":[\"\"],\"parentId\":[\"\"],\"department\":[\"\"],\"realName\":[\"\"],\"params[beginTime]\":[\"\"],\"params[endTime]\":[\"\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-25 10:49:54', 'Invalid bound statement (not found): com.github.fashionbrot.core.mapper.RetirementPayrollMapper.selectAll', 0);
+INSERT INTO `sys_log` VALUES (210, '离退休工资管理-查询离退休人员工资列表', '/retirement/payroll/queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"],\"deptId\":[\"\"],\"parentId\":[\"\"],\"department\":[\"\"],\"realName\":[\"\"],\"params[beginTime]\":[\"\"],\"params[endTime]\":[\"\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-25 10:46:56', 'Invalid bound statement (not found): com.github.fashionbrot.core.mapper.RetirementPayrollMapper.selectAll', 0);
+INSERT INTO `sys_log` VALUES (209, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-25 10:46:38', NULL, 0);
+INSERT INTO `sys_log` VALUES (208, '', '/system/user//queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"],\"deptId\":[\"\"],\"parentId\":[\"\"],\"identityCard\":[\"\"],\"realName\":[\"张三\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-25 10:01:53', '\r\n### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'张三\' in \'where clause\'\r\n### The error may exist in file [D:\\workspace\\retirement-pay\\core\\target\\classes\\com\\github\\fashionbrot\\core\\mapper\\xml\\UserInfoMapper.xml]\r\n### The error may involve com.github.fashionbrot.core.mapper.UserInfoMapper.queryAll-Inline\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM sys_user_info a LEFT JOIN sys_user_role_relation b ON a.id = b.user_id LEFT JOIN sys_role_info c ON c.id = b.role_id WHERE a.del_flag = 0 AND a.real_name LIKE CONCAT(\'%\', 张三, \'%\')\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'张三\' in \'where clause\'\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column \'张三\' in \'where clause\'', 0);
+INSERT INTO `sys_log` VALUES (207, '', '/system/user//queryAll', 'POST', '0:0:0:0:0:0:0:1', '{\"pageSize\":[\"10\"],\"pageNum\":[\"1\"],\"orderByColumn\":[\"createTime\"],\"isAsc\":[\"desc\"],\"deptId\":[\"\"],\"parentId\":[\"\"],\"identityCard\":[\"\"],\"realName\":[\"\"]}', 'queryAll', 2, 1, 1, NULL, '2021-03-25 09:56:00', ' <br/>### Error querying database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'\'%\') <br/>              <br/>              <br/>                AND a.real_name like CONCAT(\'%\'\' at line 22 <br/>### The error may exist in file [D:\\workspace\\retirement-pay\\core\\target\\classes\\com\\github\\fashionbrot\\core\\mapper\\xml\\UserInfoMapper.xml] <br/>### The error may involve com.github.fashionbrot.core.mapper.UserInfoMapper.queryAll-Inline <br/>### The error occurred while setting parameters <br/>### SQL: select count(0) from (SELECT             a.super_admin,             a.id,             a.user_name,             a.real_name,             a.identity_card,             a.department,             a.`password`,             a.create_date,             a.`status`,             a.last_login_time,             a.update_date,             c.role_name,        ', 0);
+INSERT INTO `sys_log` VALUES (206, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-25 09:55:52', NULL, 0);
+INSERT INTO `sys_log` VALUES (205, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-25 09:23:30', NULL, 0);
+INSERT INTO `sys_log` VALUES (204, '', '/system/user/doLogin', 'POST', '0:0:0:0:0:0:0:1', '{\"username\":[\"admin\"],\"password\":[\"admin123\"],\"rememberMe\":[\"false\"]}', 'login', 1, 1, NULL, NULL, '2021-03-25 08:51:47', NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -197,7 +161,7 @@ CREATE TABLE `sys_menu`  (
   `del_flag` tinyint(1) NULL DEFAULT 0 COMMENT '删除标志位 1删除 0未删除',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_del_flag`(`del_flag`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -233,6 +197,8 @@ INSERT INTO `sys_menu` VALUES (50, '工资信息', 1, '', 0, 600, '', 'menuItem'
 INSERT INTO `sys_menu` VALUES (51, '工资列表', 2, '/retirement/payroll/index', 50, 601, 'retirement:payroll:index', 'menuItem', 0, 0, 'fa fa-envelope-open-o', 1, '2021-03-08 15:31:25', 1, '2021-03-12 16:23:03', 0);
 INSERT INTO `sys_menu` VALUES (52, '工资导入', 2, '/retirement/type/index', 50, 602, 'retirement:type:index', 'menuItem', 0, 0, 'fa fa-file-excel-o', 1, '2021-03-08 17:00:16', 1, '2021-03-09 14:37:24', 0);
 INSERT INTO `sys_menu` VALUES (53, '权限列表-新增', 3, '/retirement/type/insert', 52, 603, 'retirement:type:insert', 'menuItem', 0, 1, '', 1, '2021-03-09 16:33:17', NULL, NULL, 0);
+INSERT INTO `sys_menu` VALUES (54, '权限列表-查看详情', 3, '/retirement/payroll/index/payDetail', 51, 604, 'system:payroll:index:detail', 'menuItem', 0, 1, '', 1, '2021-03-23 10:46:57', 1, '2021-03-23 10:47:17', 0);
+INSERT INTO `sys_menu` VALUES (55, '修改密码', 3, '', 0, 701, 'system:user:resetPwd', 'menuItem', 0, 1, '', 1, '2021-03-24 09:06:54', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_menu_role_relation
@@ -246,42 +212,46 @@ CREATE TABLE `sys_menu_role_relation`  (
   `create_date` datetime(0) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_role_id`(`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单-角色关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 80 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单-角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu_role_relation
 -- ----------------------------
-INSERT INTO `sys_menu_role_relation` VALUES (1, 1, 1, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (2, 1, 2, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (13, 1, 3, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (14, 1, 4, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (15, 1, 5, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (16, 1, 6, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (17, 1, 7, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (18, 1, 8, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (3, 1, 9, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (4, 1, 10, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (19, 1, 11, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (20, 1, 12, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (21, 1, 13, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (22, 1, 14, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (23, 1, 15, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (8, 1, 16, 1, '2021-03-08 15:32:11');
-INSERT INTO `sys_menu_role_relation` VALUES (9, 1, 17, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (34, 1, 18, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (35, 1, 19, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (36, 1, 20, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (37, 1, 21, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (38, 1, 22, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (45, 1, 23, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (46, 1, 24, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (47, 1, 25, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (48, 1, 26, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (49, 1, 27, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (50, 1, 28, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (51, 1, 29, 1, '2021-03-08 15:32:12');
-INSERT INTO `sys_menu_role_relation` VALUES (50, 2, 30, 1, '2021-03-08 15:32:24');
-INSERT INTO `sys_menu_role_relation` VALUES (51, 2, 31, 1, '2021-03-08 15:32:24');
+INSERT INTO `sys_menu_role_relation` VALUES (1, 1, 34, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (2, 1, 35, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (13, 1, 36, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (14, 1, 37, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (15, 1, 38, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (16, 1, 39, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (17, 1, 40, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (18, 1, 41, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (3, 1, 42, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (4, 1, 43, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (19, 1, 44, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (20, 1, 45, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (21, 1, 46, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (22, 1, 47, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (23, 1, 48, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (8, 1, 49, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (9, 1, 50, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (34, 1, 51, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (35, 1, 52, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (36, 1, 53, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (37, 1, 54, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (38, 1, 55, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (45, 1, 56, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (46, 1, 57, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (47, 1, 58, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (48, 1, 59, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (49, 1, 60, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (50, 1, 61, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (51, 1, 62, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (52, 1, 63, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (53, 1, 64, 1, '2021-03-22 15:56:16');
+INSERT INTO `sys_menu_role_relation` VALUES (50, 2, 76, 1, '2021-03-24 09:07:12');
+INSERT INTO `sys_menu_role_relation` VALUES (51, 2, 77, 1, '2021-03-24 09:07:12');
+INSERT INTO `sys_menu_role_relation` VALUES (54, 2, 78, 1, '2021-03-24 09:07:12');
+INSERT INTO `sys_menu_role_relation` VALUES (55, 2, 79, 1, '2021-03-24 09:07:12');
 
 -- ----------------------------
 -- Table structure for sys_role_info
@@ -304,8 +274,8 @@ CREATE TABLE `sys_role_info`  (
 -- ----------------------------
 -- Records of sys_role_info
 -- ----------------------------
-INSERT INTO `sys_role_info` VALUES (1, NULL, '管理员', 1, 1, '2021-03-08 15:32:11', NULL, NULL, 0);
-INSERT INTO `sys_role_info` VALUES (2, NULL, '普通员工', 1, 1, '2021-03-08 15:32:24', NULL, NULL, 0);
+INSERT INTO `sys_role_info` VALUES (1, NULL, '管理员', 1, 1, '2021-03-08 15:32:11', 1, '2021-03-22 15:56:16', 0);
+INSERT INTO `sys_role_info` VALUES (2, NULL, '普通员工', 1, 1, '2021-03-08 15:32:24', 1, '2021-03-24 09:07:12', 0);
 
 -- ----------------------------
 -- Table structure for sys_user_info
@@ -319,7 +289,7 @@ CREATE TABLE `sys_user_info`  (
   `real_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '真实姓名',
   `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '加密密码',
   `salt` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码加盐参数',
-  `status` tinyint(2) NOT NULL COMMENT '用户状态',
+  `status` tinyint(2) NOT NULL DEFAULT 1 COMMENT '用户状态',
   `super_admin` tinyint(1) NULL DEFAULT 0 COMMENT '是否是超级管理员 1超级 0普通',
   `last_login_time` datetime(0) NULL DEFAULT NULL COMMENT '最后登录时间',
   `create_id` bigint(11) NOT NULL COMMENT '创建者id',
@@ -329,12 +299,13 @@ CREATE TABLE `sys_user_info`  (
   `del_flag` tinyint(1) NULL DEFAULT 0 COMMENT '删除标志位 1删除 0未删除',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_del_flag`(`del_flag`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 298 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_info
 -- ----------------------------
-INSERT INTO `sys_user_info` VALUES (1, 'admin', '电子所', NULL, '管理员', 'e984d05048ac07c56121fa2808894ddf', 'b09f050687cc631d9515d416d09b17e4', 1, 1, '2021-03-19 16:29:46', 1, '2020-09-11 23:40:18', 1, '2021-03-08 15:32:52', 0);
+INSERT INTO `sys_user_info` VALUES (1, 'admin', '电子所', 'admin', '管理员', 'e984d05048ac07c56121fa2808894ddf', 'b09f050687cc631d9515d416d09b17e4', 1, 1, '2021-03-26 15:10:32', 1, '2020-09-11 23:40:18', 1, '2021-03-08 15:32:52', 0);
+INSERT INTO `sys_user_info` VALUES (297, '张宏勋', '标准所', '110102192101252315', '张宏勋', 'b8ea92f0a0b80707e4b71b27f511d536', '6b44747daf914082ef3b3871d9d21753', 1, 0, '2021-03-26 14:46:59', 1, '2021-03-25 17:20:57', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_user_role_relation
@@ -349,11 +320,12 @@ CREATE TABLE `sys_user_role_relation`  (
   `del_flag` tinyint(1) NULL DEFAULT 0 COMMENT '删除标志位 1删除 0未删除',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `index_del_flag`(`del_flag`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户-角色关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户-角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user_role_relation
 -- ----------------------------
 INSERT INTO `sys_user_role_relation` VALUES (1, 1, 1, 1, '2021-03-08 15:32:52', 0);
+INSERT INTO `sys_user_role_relation` VALUES (11, 297, 2, 1, '2021-03-25 17:20:57', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
